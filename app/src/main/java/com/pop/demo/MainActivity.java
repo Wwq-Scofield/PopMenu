@@ -13,24 +13,26 @@ public class MainActivity extends AppCompatActivity {
 
     private LinearLayout rlroot;
     private Toast toast;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        rlroot= (LinearLayout) findViewById(R.id.rlroot);
-        toast= Toast.makeText(MainActivity.this,"",Toast.LENGTH_SHORT);
+        rlroot = (LinearLayout) findViewById(R.id.rlroot);
+        toast = Toast.makeText(MainActivity.this, "", Toast.LENGTH_SHORT);
         findViewById(R.id.tv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PopMenuManager.getInstance().init(MainActivity.this, new PopMenuManager.Builder()
+                PopMenuManager manager = new PopMenuManager();
+                manager.init(MainActivity.this, new PopMenuManager.Builder()
                         .setFirstContent("相机")
                         .setSecendContent("相册")
                         .setThirdtContent("取消")
-                        .setFirstColor("#FF4949").build(), new PopMenuManager.OnViewClickListener() {
+                        .setSecendColor("#FF4949").build(), new PopMenuManager.OnViewClickListener() {
                     @Override
                     public void onMenuClick(int flag) {
 
-                        switch (flag){
+                        switch (flag) {
                             case PopMenuManager.MENU_FIRST:
                                 toast.setText("1");
                                 toast.show();
@@ -45,8 +47,39 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                         }
                     }
-                }).showOutMenu(rlroot);
+                });
+                manager.showOutMenu(rlroot);
             }
         });
+    }
+
+
+    public void click(View view) {
+        PopMenuManager manager = new PopMenuManager();
+        manager.init(MainActivity.this, new PopMenuManager.Builder()
+                .setFirstContent("保存到手机")
+                .setSecendContent("删除")
+                .setThirdtContent("取消")
+                .setFirstColor("#FF4949").build(), new PopMenuManager.OnViewClickListener() {
+            @Override
+            public void onMenuClick(int flag) {
+
+                switch (flag) {
+                    case PopMenuManager.MENU_FIRST:
+                        toast.setText("1");
+                        toast.show();
+                        break;
+                    case PopMenuManager.MENU_SECEND:
+                        toast.setText("2");
+                        toast.show();
+                        break;
+                    case PopMenuManager.MENU_THIRD:
+                        toast.setText("3");
+                        toast.show();
+                        break;
+                }
+            }
+        });
+        manager.showOutMenu(rlroot);
     }
 }

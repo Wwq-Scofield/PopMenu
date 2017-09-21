@@ -29,13 +29,8 @@ public class PopMenuManager {
     private OnViewClickListener mlistener;
     private static PopMenuManager manager;
 
-    public static PopMenuManager getInstance() {
-        if (manager == null) {
-            manager = new PopMenuManager();
-        }
-        return manager;
+    public PopMenuManager() {
     }
-
     public PopMenuManager init(Context context, Builder builder, OnViewClickListener listener) {
         if (builder == null || context == null) {
             throw new RuntimeException("builder or context is null");
@@ -81,7 +76,7 @@ public class PopMenuManager {
             return this;
         }
 
-        public Builder setThirdtColor(String color) {
+        public Builder setThirdColor(String color) {
             this.thirdColor = color;
             return this;
         }
@@ -109,7 +104,8 @@ public class PopMenuManager {
         Button btn1 = (Button) view.findViewById(R.id.menu_first);
         Button btn2 = (Button) view.findViewById(R.id.menu_secend);
         Button btn3 = (Button) view.findViewById(R.id.menu_third);
-        Log.d("wwq", "firstContent=" + firstContent + " secendContent=" + secendContent + " thirdContent=" + thirdContent);
+        Log.d("wwq", "firstColor=" + firstColor  );
+        Log.d("wwq", "secendColor=" + secendColor  );
         if (!TextUtils.isEmpty(firstColor)) {
             btn1.setTextColor(Color.parseColor(firstColor));
         }
