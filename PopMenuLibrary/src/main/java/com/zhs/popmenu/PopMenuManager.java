@@ -1,7 +1,9 @@
 package com.zhs.popmenu;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -16,37 +18,43 @@ import android.widget.PopupWindow;
  */
 
 public class PopMenuManager {
-    public static final int MENU_FIRST=1;
-    public static final int MENU_SECEND=2;
-    public static final int MENU_THIRD=3;
+    public static final int MENU_FIRST = 1;
+    public static final int MENU_SECEND = 2;
+    public static final int MENU_THIRD = 3;
     private PopupWindow window;
     private Context mContext;
-    private String firstContent;
-    private String secendContent;
-    private String thirdContent;
+    private String firstContent, firstColor;
+    private String secendContent, secendColor;
+    private String thirdContent, thirdColor;
     private OnViewClickListener mlistener;
-    private static  PopMenuManager manager;
-    public static PopMenuManager getInstance(){
-        if(manager==null){
-            manager=new PopMenuManager();
+    private static PopMenuManager manager;
+
+    public static PopMenuManager getInstance() {
+        if (manager == null) {
+            manager = new PopMenuManager();
         }
         return manager;
     }
-    public PopMenuManager init(Context context, Builder builder,OnViewClickListener listener) {
-        if(builder==null||context==null){
+
+    public PopMenuManager init(Context context, Builder builder, OnViewClickListener listener) {
+        if (builder == null || context == null) {
             throw new RuntimeException("builder or context is null");
         }
         this.mContext = context;
-        this.mlistener=listener;
+        this.mlistener = listener;
         this.firstContent = builder.firstContent;
         this.secendContent = builder.secendContent;
         this.thirdContent = builder.thirdContent;
+        this.firstColor = builder.firstColor;
+        this.secendColor = builder.secendColor;
+        this.thirdColor = builder.thirdColor;
         return manager;
     }
+
     public static class Builder {
-        public String firstContent;
-        public String secendContent;
-        public String thirdContent;
+        public String firstContent, firstColor;
+        public String secendContent, secendColor;
+        public String thirdContent, thirdColor;
 
         public Builder setFirstContent(String content) {
             this.firstContent = content;
@@ -62,10 +70,27 @@ public class PopMenuManager {
             this.thirdContent = content;
             return this;
         }
+
+        public Builder setFirstColor(String color) {
+            this.firstColor = color;
+            return this;
+        }
+
+        public Builder setSecendColor(String color) {
+            this.secendColor = color;
+            return this;
+        }
+
+        public Builder setThirdtColor(String color) {
+            this.thirdColor = color;
+            return this;
+        }
+
         public Builder build() {
             return this;
         }
     }
+
     public void showOutMenu(View locationView) {
         LayoutInflater layoutIn = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutIn.inflate(R.layout.layout_pop_menu, null);
@@ -84,7 +109,16 @@ public class PopMenuManager {
         Button btn1 = (Button) view.findViewById(R.id.menu_first);
         Button btn2 = (Button) view.findViewById(R.id.menu_secend);
         Button btn3 = (Button) view.findViewById(R.id.menu_third);
-        Log.d("wwq","firstContent="+firstContent+" secendContent="+secendContent+" thirdContent="+thirdContent);
+        Log.d("wwq", "firstContent=" + firstContent + " secendContent=" + secendContent + " thirdContent=" + thirdContent);
+        if (!TextUtils.isEmpty(firstColor)) {
+            btn1.setTextColor(Color.parseColor(firstColor));
+        }
+        if (!TextUtils.isEmpty(secendColor)) {
+            btn2.setTextColor(Color.parseColor(secendColor));
+        }
+        if (!TextUtils.isEmpty(thirdColor)) {
+            btn3.setTextColor(Color.parseColor(thirdColor));
+        }
         btn1.setText(firstContent);
         btn2.setText(secendContent);
         btn3.setText(thirdContent);
@@ -92,7 +126,7 @@ public class PopMenuManager {
             @Override
             public void onClick(View v) {
                 window.dismiss();
-                if(mlistener!=null){
+                if (mlistener != null) {
                     mlistener.onMenuClick(MENU_FIRST);
                 }
             }
@@ -101,7 +135,7 @@ public class PopMenuManager {
             @Override
             public void onClick(View v) {
                 window.dismiss();
-                if(mlistener!=null){
+                if (mlistener != null) {
                     mlistener.onMenuClick(MENU_SECEND);
                 }
             }
@@ -110,7 +144,7 @@ public class PopMenuManager {
             @Override
             public void onClick(View v) {
                 window.dismiss();
-                if(mlistener!=null){
+                if (mlistener != null) {
                     mlistener.onMenuClick(MENU_THIRD);
                 }
             }
@@ -123,7 +157,7 @@ public class PopMenuManager {
         window.showAtLocation(locationView, Gravity.BOTTOM, 0, 0);
     }
 
-    public interface OnViewClickListener{
+    public interface OnViewClickListener {
         void onMenuClick(int flag);
     }
 }

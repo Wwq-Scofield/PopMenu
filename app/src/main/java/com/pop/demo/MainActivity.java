@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
                 PopMenuManager.getInstance().init(MainActivity.this, new PopMenuManager.Builder()
                         .setFirstContent("相机")
                         .setSecendContent("相册")
-                        .setThirdtContent("取消").build(), new PopMenuManager.OnViewClickListener() {
+                        .setThirdtContent("取消")
+                        .setFirstColor("#FF4949").build(), new PopMenuManager.OnViewClickListener() {
                     @Override
                     public void onMenuClick(int flag) {
 
