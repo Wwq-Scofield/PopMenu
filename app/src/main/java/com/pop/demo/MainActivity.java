@@ -1,5 +1,6 @@
 package com.pop.demo;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +8,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.zhs.popmenu.CommenDialogManager;
+import com.zhs.popmenu.CommonDialog;
 import com.zhs.popmenu.PopMenuManager;
 
 public class MainActivity extends AppCompatActivity {
@@ -55,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void click(View view) {
-        PopMenuManager manager = new PopMenuManager();
+        final PopMenuManager manager = new PopMenuManager();
         manager.init(MainActivity.this, new PopMenuManager.Builder()
                 .setFirstContent("保存到手机")
                 .setSecendContent("删除")
@@ -74,12 +77,37 @@ public class MainActivity extends AppCompatActivity {
                         toast.show();
                         break;
                     case PopMenuManager.MENU_THIRD:
-                        toast.setText("3");
+                        showCommonDialog();
+                        break;
+                }
+            }
+
+
+        });
+        manager.showOutMenu(rlroot);
+    }
+
+    private void showCommonDialog() {
+        CommenDialogManager manager=new CommenDialogManager();
+        manager.init(this, new CommenDialogManager.Builder()
+                .setFirstContent("复制")
+                .setSecendColor("#FFEF0202")
+                 , new CommenDialogManager.onCommonMenuClick() {
+            @Override
+            public void onBtnClick(int position) {
+                switch (position){
+                    case CommenDialogManager.NEGATIVE_BTN:
+                        toast.setText("取消");
+                        toast.show();
+                        break;
+                    case CommenDialogManager.POSITIVE_BTN:
+                        toast.setText("确认");
                         toast.show();
                         break;
                 }
             }
         });
-        manager.showOutMenu(rlroot);
+        manager.showCommnonialog(this);
     }
+
 }

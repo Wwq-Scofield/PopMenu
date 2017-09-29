@@ -30,6 +30,7 @@ public class PopMenuManager {
     private static PopMenuManager manager;
 
     public PopMenuManager() {
+
     }
     public PopMenuManager init(Context context, Builder builder, OnViewClickListener listener) {
         if (builder == null || context == null) {
@@ -156,5 +157,6 @@ public class PopMenuManager {
     public interface OnViewClickListener {
         void onMenuClick(int flag);
     }
+
 }
 
