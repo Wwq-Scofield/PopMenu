@@ -58,7 +58,7 @@
             android:paddingBottom="8dp"
             android:paddingLeft="12dp"
             android:paddingRight="12dp"
-            android:background="@drawable/tv_select"
+            android:background="@drawable/menu_tv_select"
             android:textSize="14sp" />
 
         <TextView
@@ -72,7 +72,7 @@
             android:paddingLeft="12dp"
             android:paddingRight="12dp"
             android:text="确认"
-            android:background="@drawable/tv_select"
+            android:background="@drawable/menu_tv_select"
             android:textColor="#FF077FEF"
             android:textSize="14sp" />
     </LinearLayout>
