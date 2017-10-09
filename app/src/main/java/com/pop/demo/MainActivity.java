@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     public void click(View view) {
         final PopMenuManager manager = new PopMenuManager();
         manager.init(MainActivity.this, new PopMenuManager.Builder()
-                .setFirstContent("保存到手机")
+//                .setFirstContent("保存到手机")
                 .setSecendContent("删除")
                 .setThirdtContent("取消")
                 .setFirstColor("#FF4949").build(), new PopMenuManager.OnViewClickListener() {

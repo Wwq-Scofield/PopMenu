@@ -12,6 +12,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 /**
  * Created by Administrator on 2017/9/19.
@@ -102,9 +103,9 @@ public class PopMenuManager {
                 }
             }
         });
-        Button btn1 = (Button) view.findViewById(R.id.menu_first);
-        Button btn2 = (Button) view.findViewById(R.id.menu_secend);
-        Button btn3 = (Button) view.findViewById(R.id.menu_third);
+        TextView btn1 = (TextView) view.findViewById(R.id.menu_first);
+        TextView btn2 = (TextView) view.findViewById(R.id.menu_secend);
+        TextView btn3 = (TextView) view.findViewById(R.id.menu_third);
         Log.d("wwq", "firstColor=" + firstColor  );
         Log.d("wwq", "secendColor=" + secendColor  );
         if (!TextUtils.isEmpty(firstColor)) {
@@ -113,12 +114,23 @@ public class PopMenuManager {
         if (!TextUtils.isEmpty(secendColor)) {
             btn2.setTextColor(Color.parseColor(secendColor));
         }
+
         if (!TextUtils.isEmpty(thirdColor)) {
             btn3.setTextColor(Color.parseColor(thirdColor));
         }
-        btn1.setText(firstContent);
-        btn2.setText(secendContent);
-        btn3.setText(thirdContent);
+        if(!TextUtils.isEmpty(firstContent)){
+            btn1.setVisibility(View.VISIBLE);
+            btn1.setText(firstContent);
+        }else{
+            btn1.setVisibility(View.GONE);
+        }
+        if(!TextUtils.isEmpty(secendContent)){
+            btn2.setVisibility(View.VISIBLE);
+            btn2.setText(secendContent);
+        }else{
+            btn2.setVisibility(View.GONE);
+        }
+        btn3.setText(TextUtils.isEmpty(secendContent)?"取消":thirdContent);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
