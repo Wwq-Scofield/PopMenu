@@ -2,6 +2,7 @@ package com.zhs.popmenu;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.View;
 
 /**
@@ -16,17 +17,19 @@ public class CommenDialogManager {
     private String secendContent, secendColor;
     private String mainContent,title;
     private onCommonMenuClick mlistener;
+    private onOnDissmssListener onDissListener;
     private static PopMenuManager manager;
     private CommonDialog backdialog;
     public CommenDialogManager() {
 
     }
-    public PopMenuManager init(Context context, Builder builder, onCommonMenuClick listener) {
+    public PopMenuManager init(Context context, Builder builder, onCommonMenuClick listener,onOnDissmssListener dissmssListener) {
         if (builder == null || context == null) {
             throw new RuntimeException("builder or context is null");
         }
         this.mContext = context;
         this.mlistener = listener;
+        this.onDissListener=dissmssListener;
         this.firstContent = builder.firstContent;
         this.secendContent = builder.secendContent;
         this.firstColor = builder.firstColor;
@@ -96,6 +99,14 @@ public class CommenDialogManager {
                     }
                 }
             });
+            backdialog.setOnDisMiss(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    if(onDissListener!=null){
+                        onDissListener.dismiss();
+                    }
+                }
+            });
             backdialog.getWindow().setLayout((int) context.getResources().getDimension(R.dimen.with),
                     (int) context.getResources().getDimension(R.dimen.hight));
             backdialog.show();
@@ -107,5 +118,8 @@ public class CommenDialogManager {
 
     public interface  onCommonMenuClick{
         void onBtnClick(int  position);
+    }
+    public interface  onOnDissmssListener{
+        void dismiss();
     }
 }

@@ -2,6 +2,7 @@ package com.zhs.popmenu;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -31,9 +32,18 @@ public class CommonDialog extends Dialog {
         negativeButton = (TextView) mView.findViewById(R.id.tv_negative);
         tvContent= (TextView) mView.findViewById(R.id.tv_desc);
         tvTitle= (TextView) mView.findViewById(R.id.tv_title);
+        setOnDismissListener(new OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+
+            }
+        });
         super.setContentView(mView);
     }
 
+    public void setOnDisMiss(OnDismissListener listener){
+        setOnDismissListener(listener);
+    }
     /**
      * 监听器
      *
@@ -83,6 +93,6 @@ public class CommonDialog extends Dialog {
         if(!TextUtils.isEmpty(positiveColor)){
             this.positiveButton.setTextColor(Color.parseColor(positiveColor));
         }
-
     }
+
 }

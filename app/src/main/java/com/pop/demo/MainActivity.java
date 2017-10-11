@@ -90,23 +90,29 @@ public class MainActivity extends AppCompatActivity {
     private void showCommonDialog() {
         CommenDialogManager manager=new CommenDialogManager();
         manager.init(this, new CommenDialogManager.Builder()
-                .setFirstContent("复制")
-                .setSecendColor("#FFEF0202")
-                 , new CommenDialogManager.onCommonMenuClick() {
-            @Override
-            public void onBtnClick(int position) {
-                switch (position){
-                    case CommenDialogManager.NEGATIVE_BTN:
-                        toast.setText("取消");
+                        .setFirstContent("复制")
+                        .setSecendColor("#FFEF0202")
+                , new CommenDialogManager.onCommonMenuClick() {
+                    @Override
+                    public void onBtnClick(int position) {
+                        switch (position) {
+                            case CommenDialogManager.NEGATIVE_BTN:
+                                toast.setText("取消");
+                                toast.show();
+                                break;
+                            case CommenDialogManager.POSITIVE_BTN:
+                                toast.setText("确认");
+                                toast.show();
+                                break;
+                        }
+                    }
+                }, new CommenDialogManager.onOnDissmssListener() {
+                    @Override
+                    public void dismiss() {
+                        toast.setText("DISMISS");
                         toast.show();
-                        break;
-                    case CommenDialogManager.POSITIVE_BTN:
-                        toast.setText("确认");
-                        toast.show();
-                        break;
-                }
-            }
-        });
+                    }
+                });
         manager.showCommnonialog(this);
     }
 
