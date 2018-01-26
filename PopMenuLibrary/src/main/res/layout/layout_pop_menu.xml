@@ -8,6 +8,9 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:layout_marginBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="#00000000"
@@ -33,21 +36,18 @@
             android:layout_width="match_parent"
             android:layout_gravity="center"
             android:layout_height="48dp"
-            android:background="@drawable/menu_select"
+            android:background="@drawable/menu_select_down"
             android:text="文本2"
             android:textColor="#333333"
             android:textSize="15dp"/>
-        <View
-            android:background="#eeeeee"
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
         <TextView
             android:gravity="center"
             android:id="@+id/menu_third"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_gravity="center"
             android:layout_height="48dp"
-            android:background="@drawable/menu_select"
+            android:background="@drawable/menu_select_boottom"
             android:padding="5dip"
             android:text="文本3"
             android:textColor="#333333"
